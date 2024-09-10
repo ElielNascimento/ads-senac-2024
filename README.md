@@ -133,7 +133,7 @@ public class Funcionario {
 ```
 <br>
 
-#### 🟣 INTERFACE REPOSITORIO
+#### 🟣 CLASSE SERVICE
 ```
 @Service
 public class FuncionarioService {
