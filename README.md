@@ -88,11 +88,7 @@ public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // identificador único
-    
-    @ManyToOne // Relacionamento com a entidade Pessoa
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa; // Referência à entidade Pessoa
-    
+   
     private String cargo; // Cargo no qual o funcionário trabalha
     
     private BigDecimal salario; // Salário do funcionário
