@@ -169,8 +169,9 @@ public class FuncionarioService {
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 }
 
-<br>
+
 ```
+<br>
 #### 🟣 CLASSE CONTROLLER
 ```
 @RestController
