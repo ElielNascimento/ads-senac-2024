@@ -80,7 +80,7 @@ Você pode acessar o console do H2 em http://localhost:8080/h2-console com as cr
 ```
 <br>
 
-#### 🟣 CLASSE ENTIDADE ESTRUTURA
+ 🟣 CLASSE ENTIDADE ESTRUTURA
 ```
 @Entity
 public class Funcionario {
@@ -131,9 +131,8 @@ public class Funcionario {
     }
 }
 ```
-<br>
 
-#### 🟣 CLASSE SERVICE
+ 🟣 CLASSE SERVICE
 ```
 @Service
 public class FuncionarioService {
@@ -162,8 +161,8 @@ public class FuncionarioService {
     }
 }
 ```
-<br>
-#### 🟣 INTERFACE REPOSITORIO
+
+ 🟣 INTERFACE REPOSITORIO
 
 ```
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
