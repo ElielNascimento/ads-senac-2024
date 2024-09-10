@@ -63,7 +63,7 @@ Você pode acessar o console do H2 em http://localhost:8080/h2-console com as cr
 ## 🗂 Estrutura das Entidades 
 
 #### 🔵 Pessoa
-```JavaScript
+```
   Long id;                   // identificador único
   String nome;               // nome completo
   String email;              // endereço de e-mail
@@ -72,7 +72,7 @@ Você pode acessar o console do H2 em http://localhost:8080/h2-console com as cr
 <br>
 
 #### 🟣 Funcionario
-```JavaScript
+```
   Long id;             // identificador único
   Pessoa pessoa;       // Referência à entidade Pessoa
   String cargo;        // Cargo no qual o funcionário trabalha
@@ -80,6 +80,136 @@ Você pode acessar o console do H2 em http://localhost:8080/h2-console com as cr
 ```
 <br>
 
+#### 🟣 CLASSE ENTIDADE ESTRUTURA
+```
+@Entity
+public class Funcionario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // identificador único
+    
+    @ManyToOne // Relacionamento com a entidade Pessoa
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa; // Referência à entidade Pessoa
+    
+    private String cargo; // Cargo no qual o funcionário trabalha
+    
+    private BigDecimal salario; // Salário do funcionário
+
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
+    }
+}
+```
+<br>
+
+#### 🟣 INTERFACE REPOSITORIO
+```
+@Service
+public class FuncionarioService {
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
+
+    // Listar todos os funcionários
+    public List<Funcionario> listarTodos() {
+        return funcionarioRepository.findAll();
+    }
+
+    // Buscar funcionário por ID
+    public Optional<Funcionario> buscarPorId(Long id) {
+        return funcionarioRepository.findById(id);
+    }
+
+    // Criar ou atualizar funcionário
+    public Funcionario salvar(Funcionario funcionario) {
+        return funcionarioRepository.save(funcionario);
+    }
+
+    // Deletar funcionário por ID
+    public void deletar(Long id) {
+        funcionarioRepository.deleteById(id);
+    }
+}
+```
+<br>
+#### 🟣 INTERFACE REPOSITORIO
+```
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
+}
+```
+<br>
+#### 🟣 CLASSE CONTROLLER
+```
+@RestController
+@RequestMapping("/funcionarios")
+public class FuncionarioController {
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
+
+    // CREATE
+    @PostMapping
+    public Funcionario criarFuncionario(@RequestBody Funcionario funcionario) {
+        return funcionarioRepository.save(funcionario);
+    }
+
+    // READ
+    @GetMapping
+    public List<Funcionario> listarFuncionarios() {
+        return funcionarioRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Funcionario buscarFuncionarioPorId(@PathVariable Long id) {
+        return funcionarioRepository.findById(id).orElse(null);
+    }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public Funcionario atualizarFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionario) {
+        funcionario.setId(id);
+        return funcionarioRepository.save(funcionario);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void deletarFuncionario(@PathVariable Long id) {
+        funcionarioRepository.deleteById(id);
+    }
+}
+```
+<br>
 ## 🚧 Rotas da API
 #### 🔵 Pessoa
 - **GET /pessoas** - Lista todas as pessoas
