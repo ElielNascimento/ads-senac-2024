@@ -161,8 +161,9 @@ public class FuncionarioService {
         funcionarioRepository.deleteById(id);
     }
 }
-```
+
 <br>
+```
 #### 🟣 INTERFACE REPOSITORIO
 ```
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
