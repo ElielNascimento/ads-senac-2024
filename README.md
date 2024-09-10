@@ -168,12 +168,9 @@ public class FuncionarioService {
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 }
 
-
 ```
-```
-<br>
 #### 🟣 CLASSE CONTROLLER
-
+```
 @RestController
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
