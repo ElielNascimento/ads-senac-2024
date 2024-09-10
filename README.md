@@ -161,15 +161,16 @@ public class FuncionarioService {
         funcionarioRepository.deleteById(id);
     }
 }
-
-<br>
 ```
+<br>
 #### 🟣 INTERFACE REPOSITORIO
+
 ```
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 }
-```
+
 <br>
+```
 #### 🟣 CLASSE CONTROLLER
 ```
 @RestController
